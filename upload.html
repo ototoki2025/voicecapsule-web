@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>ボイスカプセル｜声を登録する</title>
+  <style>
+    body {
+      font-family: "Hiragino Sans", "Noto Sans JP", sans-serif;
+      background: #fff7f8;
+      color: #333;
+      text-align: center;
+      padding: 50px;
+    }
+    h1 {
+      color: #e17b92;
+    }
+    input[type=file] {
+      margin: 20px 0;
+    }
+    button {
+      background: #e17b92;
+      border: none;
+      padding: 10px 20px;
+      color: white;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+    #message {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎙️ あなたの声を未来へ残しましょう</h1>
+  <p>スマートフォンで録音した音声ファイル（.mp3, .wavなど）をアップロードしてください。</p>
+
+  <input type="file" id="fileInput" accept="audio/*"><br>
+  <button id="uploadBtn">声を登録する</button>
+
+  <p id="message"></p>
+
+  <script>
+    document.getElementById('uploadBtn').addEventListener('click', () => {
+      const fileInput = document.getElementById('fileInput');
+      const message = document.getElementById('message');
+
+      if (!fileInput.files.length) {
+        message.textContent = "ファイルが選択されていません。";
+        return;
+      }
+
+      const file = fileInput.files[0];
+      message.textContent = "声を登録しています…";
+
+      // 一時保存＆再生ページへ遷移
+      setTimeout(() => {
+        localStorage.setItem("voiceURL", URL.createObjectURL(file));
+        window.location.href = "play.html";
+      }, 1500);
+    });
+  </script>
+</body>
+</html>
