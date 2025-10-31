@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>ボイスカプセル｜声を聴く</title>
+  <style>
+    body {
+      font-family: "Hiragino Sans", "Noto Sans JP", sans-serif;
+      background: #fff7f8;
+      color: #333;
+      text-align: center;
+      padding: 50px;
+    }
+    h1 {
+      color: #e17b92;
+    }
+    audio {
+      margin-top: 30px;
+    }
+    button {
+      margin-top: 20px;
+      background: #e17b92;
+      border: none;
+      padding: 10px 20px;
+      color: white;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+    a {
+      color: #e17b92;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎧 あの瞬間をもう一度</h1>
+  <p>あなたの大切な声がここに届きました。</p>
+  <audio id="audioPlayer" controls></audio>
+  <br>
+  <button id="backBtn">別の声を登録する</button>
+
+  <script>
+    const audioURL = localStorage.getItem("voiceURL");
+    const player = document.getElementById("audioPlayer");
+    const backBtn = document.getElementById("backBtn");
+
+    if (audioURL) {
+      player.src = audioURL;
+    } else {
+      document.body.innerHTML = "<h2>⚠️ 登録された音声が見つかりません。</h2><p><a href='upload.html'>こちらから新しく登録してください。</a></p>";
+    }
+
+    backBtn.onclick = () => {
+      localStorage.removeItem("voiceURL");
+      window.location.href = "upload.html";
+    };
+  </script>
+</body>
+</html>
