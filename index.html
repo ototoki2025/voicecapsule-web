@@ -1,8 +1,56 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
-<meta http-equiv="refresh" content="0; URL=upload.html" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Voicecapsule - トップ</title>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        width: 100vw;
+        height: 100vh;
+        background-image: url('top.jpg');  /* ← あなたの画像 */
+        background-size: cover;
+        background-position: center;
+        font-family: 'Hiragino Sans', sans-serif;
+    }
+
+    /* 透明ボタン（見えないけど押せる） */
+    .btn {
+        position: absolute;
+        display: block;
+        width: 60%;
+        height: 8%;
+        left: 20%; 
+        opacity: 0;  /* ← 完全に透明 */
+    }
+
+    /* ボタン位置（あなたの画像に合わせて調整済み） */
+    #btn-memory {
+        top: 48%;   /* 記憶する */
+        height: 12%;
+        width: 40%;
+        left: 30%;
+    }
+
+    #btn-howto {
+        top: 75%;   /* 使い方を見る */
+    }
+
+    #btn-before {
+        top: 85%;   /* 記憶する前に */
+    }
+</style>
+
 </head>
 <body>
+
+<!-- ボタン（画面上は透明） -->
+<a id="btn-memory" class="btn" href="upload.html"></a>
+<a id="btn-howto" class="btn" href="howto.html"></a>
+<a id="btn-before" class="btn" href="notice.html"></a>
+
 </body>
 </html>
