@@ -11,14 +11,14 @@ body {
   padding: 0;
   width: 100vw;
   height: 100vh;
-  background-image: url('top3.jpg'); /* 再生ページ画像 */
+  background-image: url('top3.jpg'); /* ← 今回の画像 */
   background-size: cover;
   background-position: center;
   background-color: #f2e9df;
   font-family: 'Hiragino Sans', sans-serif;
 }
 
-/* audioは画面に出さない */
+/* audioは非表示 */
 audio {
   display: none;
 }
@@ -27,18 +27,32 @@ audio {
 .btn {
   position: absolute;
   display: block;
-  opacity: 0;
+  opacity: 0; /* 完全に透明 */
 }
 
-/* 再生ボタン位置（画像に合わせて調整） */
+/* 想い出す（再生） */
 #btn-play {
-  top: 55%;      /* ← 再生ボタン位置 */
-  left: 30%;
-  width: 40%;
-  height: 12%;
+  top: 49%;
+  left: 35%;
+  width: 30%;
+  height: 14%;
 }
 
-/* （任意）戻る・LINEなど後で追加可 */
+/* 取り扱い説明書 */
+#btn-howto {
+  top: 88%;
+  left: 23%;
+  width: 55%;
+  height: 8%;
+}
+
+/* 公式LINE（後でURL差し替え） */
+#btn-line {
+  top: 97%;
+  left: 23%;
+  width: 55%;
+  height: 8%;
+}
 </style>
 </head>
 
@@ -46,8 +60,10 @@ audio {
 
 <audio id="audioPlayer"></audio>
 
-<!-- 再生ボタン -->
+<!-- ボタン -->
 <a id="btn-play" class="btn" href="#"></a>
+<a id="btn-howto" class="btn" href="howto.html"></a>
+<a id="btn-line" class="btn" href="#" target="_blank"></a>
 
 <script>
 const audioURL = localStorage.getItem("voiceURL");
@@ -61,7 +77,7 @@ if (!audioURL) {
   player.src = audioURL;
 }
 
-/* ボタン押したら再生 */
+/* 想い出す → 再生 */
 playBtn.addEventListener("click", () => {
   player.play();
 });
