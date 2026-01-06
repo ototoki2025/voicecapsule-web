@@ -17,12 +17,11 @@
         background-color:#f2e9df;
         font-family: 'Hiragino Sans', sans-serif;
     }
-    
-.btn {
-    position: absolute;
-    display: block;
-    background: rgba(255, 0, 0, 0.3); /* ← 赤く半透明 */
-    border: 2px solid red;
+    .btn {
+        position: absolute;
+        display: block;
+        opacity: 0;
+        z-index: 10; /* ← 重要 */
     }
    
     #btn-memory {
@@ -35,14 +34,14 @@
     #btn-howto {
         top: 88%;
         height: 5%;
-        width: 50%;
+        width: 52%;
         left: 23%;
     }
 
     #btn-before {
         top: 97%;
         height: 5%;
-        width: 50%;
+        width: 52%;
         left: 23%;
     }
 </style>
