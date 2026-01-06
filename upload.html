@@ -1,89 +1,86 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ボイスカプセル｜声を登録する</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Voicecapsule - アップロード</title>
 
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      height: 100%;
-    }
+<style>
+body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: url('top2.jpg'); /* アップロード用画像 */
+  background-size: cover;
+  background-position: center;
+  background-color: #f2e9df;
+  font-family: 'Hiragino Sans', sans-serif;
+}
 
-    body {
-      background-image: url("top2.jpg");
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      font-family: "Hiragino Sans", "Noto Sans JP", sans-serif;
-    }
+/* 非表示のファイル入力 */
+#fileInput {
+  display: none;
+}
 
-    /* ファイル選択（透明） */
-    #fileInput {
-      position: absolute;
-      bottom: 28%;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 60%;
-      opacity: 0;
-    }
+/* 透明ボタン共通 */
+.btn {
+  position: absolute;
+  display: block;
+  opacity: 0;
+}
 
-    /* 保存ボタン（透明） */
-    #uploadBtn {
-      position: absolute;
-      bottom: 18%;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 60%;
-      height: 50px;
-      background: transparent;
-      border: none;
-    }
+/* ファイル選択ボタン */
+#btn-file {
+  top: 38%;       /* ← 画像に合わせて調整 */
+  left: 25%;
+  width: 50%;
+  height: 12%;
+}
 
-    /* アップロード中表示 */
-    #message {
-      position: absolute;
-      bottom: 10%;
-      width: 100%;
-      text-align: center;
-      color: white;
-      font-size: 14px;
-      display: none;
-    }
-  </style>
+/* 記憶するボタン */
+#btn-save {
+  top: 63%;
+  left: 30%;
+  width: 40%;
+  height: 12%;
+}
+</style>
 </head>
 
 <body>
 
+<!-- ファイル選択 -->
+<label id="btn-file" class="btn">
   <input type="file" id="fileInput" accept="audio/*,video/*">
-  <button id="uploadBtn"></button>
-  <div id="message">アップロード中…</div>
+</label>
 
-  <script>
-    document.getElementById("uploadBtn").addEventListener("click", () => {
-      const fileInput = document.getElementById("fileInput");
-      const message = document.getElementById("message");
+<!-- 保存 -->
+<a id="btn-save" class="btn" href="#"></a>
 
-      if (!fileInput.files.length) {
-        alert("音声または動画ファイルを選択してください");
-        return;
-      }
+<script>
+let selectedFile = null;
 
-      const file = fileInput.files[0];
-      message.style.display = "block";
+document.getElementById('fileInput').addEventListener('change', (e) => {
+  selectedFile = e.target.files[0];
+});
 
-      // デモ用：ローカル保存
-      const url = URL.createObjectURL(file);
-      localStorage.setItem("voiceURL", url);
+document.getElementById('btn-save').addEventListener('click', () => {
+  if (!selectedFile) {
+    alert('ファイルを選択してください');
+    return;
+  }
 
-      setTimeout(() => {
-        window.location.href = "play.html";
-      }, 1500);
-    });
-  </script>
+  // 一時保存（デモ用）
+  localStorage.setItem(
+    'voiceURL',
+    URL.createObjectURL(selectedFile)
+  );
+
+  // 再生ページへ
+  window.location.href = 'play.html';
+});
+</script>
 
 </body>
 </html>
