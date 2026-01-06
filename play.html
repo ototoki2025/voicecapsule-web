@@ -1,60 +1,71 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <title>ボイスカプセル｜声を聴く</title>
-  <style>
-    body {
-      font-family: "Hiragino Sans", "Noto Sans JP", sans-serif;
-      background: #fff7f8;
-      background-image: url('top3.jpg');
-      color: #333;
-      text-align: center;
-      padding: 50px;
-    }
-    h1 {
-      color: #e17b92;
-    }
-    audio {
-      margin-top: 30px;
-    }
-    button {
-      margin-top: 20px;
-      background: #e17b92;
-      border: none;
-      padding: 10px 20px;
-      color: white;
-      border-radius: 5px;
-      font-size: 16px;
-    }
-    a {
-      color: #e17b92;
-      text-decoration: none;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Voicecapsule - 再生</title>
+
+<style>
+body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: url('top3.jpg'); /* 再生ページ画像 */
+  background-size: cover;
+  background-position: center;
+  background-color: #f2e9df;
+  font-family: 'Hiragino Sans', sans-serif;
+}
+
+/* audioは画面に出さない */
+audio {
+  display: none;
+}
+
+/* 透明ボタン共通 */
+.btn {
+  position: absolute;
+  display: block;
+  opacity: 0;
+}
+
+/* 再生ボタン位置（画像に合わせて調整） */
+#btn-play {
+  top: 55%;      /* ← 再生ボタン位置 */
+  left: 30%;
+  width: 40%;
+  height: 12%;
+}
+
+/* （任意）戻る・LINEなど後で追加可 */
+</style>
 </head>
+
 <body>
-  <h1>🎧 あの瞬間をもう一度</h1>
-  <p>あなたの大切な声がここに届きました。</p>
-  <audio id="audioPlayer" controls></audio>
-  <br>
-  <button id="backBtn">別の声を登録する</button>
 
-  <script>
-    const audioURL = localStorage.getItem("voiceURL");
-    const player = document.getElementById("audioPlayer");
-    const backBtn = document.getElementById("backBtn");
+<audio id="audioPlayer"></audio>
 
-    if (audioURL) {
-      player.src = audioURL;
-    } else {
-      document.body.innerHTML = "<h2>⚠️ 登録された音声が見つかりません。</h2><p><a href='upload.html'>こちらから新しく登録してください。</a></p>";
-    }
+<!-- 再生ボタン -->
+<a id="btn-play" class="btn" href="#"></a>
 
-    backBtn.onclick = () => {
-      localStorage.removeItem("voiceURL");
-      window.location.href = "upload.html";
-    };
-  </script>
+<script>
+const audioURL = localStorage.getItem("voiceURL");
+const player = document.getElementById("audioPlayer");
+const playBtn = document.getElementById("btn-play");
+
+if (!audioURL) {
+  alert("登録された音声が見つかりません");
+  window.location.href = "upload.html";
+} else {
+  player.src = audioURL;
+}
+
+/* ボタン押したら再生 */
+playBtn.addEventListener("click", () => {
+  player.play();
+});
+</script>
+
 </body>
 </html>
